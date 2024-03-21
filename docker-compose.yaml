@@ -1,0 +1,34 @@
+version: "3.9"
+
+services:
+  # Express application container
+  app:
+    build: .
+    ports:
+      - "3000:3000" # Map container port 3000 to host port 5000 (adjust if needed)
+    environment:
+      # Database connection details (replace with your actual credentials)
+      MYSQL_HOST: mysql
+      MYSQL_PORT: 3306
+      MYSQL_USERNAME: root
+      MYSQL_PASSWORD: password
+      REDIS_HOST: redis
+      REDIS_PORT: 6379
+      # Other environment variables for your application
+
+  # MySQL container
+  mysql:
+    image: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: db1
+    volumes:
+      - mysql-data:/var/lib/mysql
+
+  # Redis container
+  redis:
+    image: redis:alpine
+
+# Persistent storage for MySQL data
+volumes:
+  mysql-data: {}

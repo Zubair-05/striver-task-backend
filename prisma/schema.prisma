@@ -1,0 +1,21 @@
+// schema.prisma
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = ["native", "linux-musl-openssl-3.0.x"]
+}
+
+
+model Submissions {
+  id          Int    @id @default(autoincrement())
+  username    String
+  language    String
+  source_code String
+  stdin       String
+  stdout      String
+}
